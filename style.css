@@ -1,3 +1,5 @@
+/* ========== Landing Page Styles ========== */
+
 @font-face {
   font-family: poppins;
   src: url(./fonts/Poppins-Regular.ttf);
@@ -13,6 +15,11 @@
 body,
 html {
   background-color: rgb(41, 41, 41);
+}
+
+a {
+  text-decoration: none;
+  color: white;
 }
 
 .navbar {
@@ -41,6 +48,10 @@ html {
   padding: 1rem;
 }
 
+.left-nav a {
+  color: #ff00ff;
+}
+
 .nav-content .right-nav {
   display: flex;
   align-items: center;
@@ -54,78 +65,189 @@ html {
   margin-right: 1rem;
 }
 
-a {
-  text-decoration: none;
-  color: white;
-}
-
 /* Dropdown Container */
 .dropdown-container {
-    position: relative;
-    display: inline-block;
+  position: relative;
+  display: inline-block;
 }
 
 /* Dropdown Button */
 .dropbtn {
-    text-decoration: none;
-    color: #fff;
-    font-size: 1.3rem;
-    padding: 10px;
-    cursor: pointer;
+  text-decoration: none;
+  color: #fff;
+  font-size: 1.3rem;
+  padding: 10px;
+  cursor: pointer;
 }
 
 /* Dropdown Menu */
 .dropdown-content {
-    display: none;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    background: #1c1c1c;
-    border-radius: 5px;
-    min-width: 180px;
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: #1c1c1c;
+  border-radius: 5px;
+  min-width: 180px;
 }
 
 /* Dropdown Items */
 .dropdown-content li {
-    list-style: none;
+  list-style: none;
 }
 
 .dropdown-content a {
-    display: block;
-    color: #ddd;
-    font-size: 1rem;
-    padding: 10px;
-    text-decoration: none;
+  display: block;
+  color: #ddd;
+  font-size: 1rem;
+  padding: 10px;
+  text-decoration: none;
 }
 
 .dropdown-content a:hover {
-    background: #333;
+  background: #333;
 }
 
 /* Show dropdown on hover */
 .dropdown-container:hover .dropdown-content {
-    display: block;
+  display: block;
 }
 
-.main-content{
+.main-content {
   height: 92vh;
   width: 100vw;
-  background-color: #fff;
+  /* background-color: #fff; */
   display: flex;
 }
 
-.main-content .left-content{
-  height: 100%;
-  width: 45%;
-  background-color: teal;
-}
-
-.main-content .right-content{
+.main-content .left-content {
   height: 100%;
   width: 45%;
   /* background-color: teal; */
 }
 
-.spline-element{
-  background-color: rgb(41, 41, 41);;
+.main-content .left-content h1 {
+  color: #f2ecff;
+}
+
+.main-content .right-content {
+  height: 100%;
+  width: 55%;
+}
+
+.spline-element {
+  height: 100%;
+  width: 100%;
+}
+
+.left-content {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 2rem;
+}
+
+.left-content h1 {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #ffffff;
+  margin-bottom: 0.8rem;
+}
+
+.left-content p {
+  font-size: 1.2rem;
+  color: #dddddd;
+  margin-bottom: 1rem;
+  line-height: 1.5;
+}
+
+.left-content ul {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 1.5rem;
+}
+
+.left-content ul li {
+  font-size: 1rem;
+  color: #bbbbbb;
+  margin-bottom: 0.5rem;
+}
+
+.cta-button {
+  background-color: #787586;
+  color: #ff00ff;
+  
+  font-size: 1.1rem;
+  padding: 0.8rem 1.5rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+  height: 60px;
+  width: 200px;
+}
+
+.cta-button:hover {
+  background-color: #357abd;
+}
+
+/* ========== Dream Log Page Styles ========== */
+
+/* Dream Logging Page Styles */
+.dream-log-container {
+  max-width: 600px;
+  margin: 50px auto;
+  text-align: center;
+  padding: 2rem;
+  background: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+p {
+  color: #666;
+  margin-bottom: 20px;
+}
+
+textarea {
+  width: 100%;
+  height: 150px;
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  resize: none;
+}
+
+button {
+  display: block;
+  width: 100%;
+  padding: 12px;
+  font-size: 1rem;
+  margin-top: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+#recordButton {
+  background: #ff5252;
+  color: white;
+}
+
+#submitButton {
+  background: #4caf50;
+  color: white;
+}
+
+button:hover {
+  opacity: 0.8;
 }

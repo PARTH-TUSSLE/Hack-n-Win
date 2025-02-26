@@ -14,7 +14,7 @@
         </div>
         <div class="right-nav">
           <a href="#">Home</a>
-          <a href="#">Login</a>
+          <a href="login.html">Login</a>
           <div class="dropdown-container">
             <a href="#" class="dropbtn">Features</a>
             <ul class="dropdown-content">
@@ -30,13 +30,34 @@
     </nav>
     <div class="main-content">
       <div class="left-content">
-        
-      </div>
+    <h1>From Dreams to AI-Powered Reality.</h1>
+    <p>
+        Explore the intersection of imagination and technology. Track, analyze, and visualize your dreams 
+        like never before.
+    </p>
+    <ul>
+        <li>AI-driven dream analysis</li>
+        <li>Stunning AI-generated visuals</li>
+        <li>Track emotions & patterns over time</li>
+        <li>Voice & text-based dream logging</li>
+    </ul>
+    <button class="cta-button" onclick="window.location.href='dreamlog.html'">Get Started</button>
+
+</div>
+
+
       <div class="right-content">
-        <spline-viewer class="spline-element" url="https://prod.spline.design/vhEP8ZsSUt8-TBFu/scene.splinecode"></spline-viewer>
+        <spline-viewer
+          class="spline-element"
+          url="https://prod.spline.design/vhEP8ZsSUt8-TBFu/scene.splinecode"
+        ></spline-viewer>
       </div>
     </div>
-    <script type="module" src="https://unpkg.com/@splinetool/viewer@1.9.71/build/spline-viewer.js"></script>
+
+    <script
+      type="module"
+      src="https://unpkg.com/@splinetool/viewer@1.9.71/build/spline-viewer.js"
+    ></script>
     <script src="app.js"></script>
   </body>
 </html>
