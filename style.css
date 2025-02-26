@@ -111,6 +111,7 @@ a {
   height: 92vh;
   width: 100vw;
   background-color: #fff;
+  display: flex;
 }
 
 .main-content .left-content{
@@ -123,4 +124,8 @@ a {
   height: 100%;
   width: 45%;
   /* background-color: teal; */
+}
+
+.spline-element{
+  background-color: rgb(41, 41, 41);;
 }
