@@ -1,0 +1,126 @@
+@font-face {
+  font-family: poppins;
+  src: url(./fonts/Poppins-Regular.ttf);
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  font-family: poppins;
+  box-sizing: border-box;
+}
+
+body,
+html {
+  background-color: rgb(41, 41, 41);
+}
+
+.navbar {
+  height: 8vh;
+  width: 100vw;
+}
+
+.nav-content {
+  height: 100%;
+  width: 100%;
+  /* background-color: #fff; */
+  display: flex;
+  justify-content: center;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.nav-content .left-nav {
+  display: flex;
+  /* justify-content: center; */
+  align-items: center;
+  /* background-color: rebeccapurple; */
+  height: 100%;
+  width: 50%;
+  font-size: 2rem;
+  padding: 1rem;
+}
+
+.nav-content .right-nav {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  /* background-color: red; */
+  height: 100%;
+  width: 50%;
+  gap: 1rem;
+  font-size: 1.3rem;
+  padding: 1rem;
+  margin-right: 1rem;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+}
+
+/* Dropdown Container */
+.dropdown-container {
+    position: relative;
+    display: inline-block;
+}
+
+/* Dropdown Button */
+.dropbtn {
+    text-decoration: none;
+    color: #fff;
+    font-size: 1.3rem;
+    padding: 10px;
+    cursor: pointer;
+}
+
+/* Dropdown Menu */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: #1c1c1c;
+    border-radius: 5px;
+    min-width: 180px;
+}
+
+/* Dropdown Items */
+.dropdown-content li {
+    list-style: none;
+}
+
+.dropdown-content a {
+    display: block;
+    color: #ddd;
+    font-size: 1rem;
+    padding: 10px;
+    text-decoration: none;
+}
+
+.dropdown-content a:hover {
+    background: #333;
+}
+
+/* Show dropdown on hover */
+.dropdown-container:hover .dropdown-content {
+    display: block;
+}
+
+.main-content{
+  height: 92vh;
+  width: 100vw;
+  background-color: #fff;
+}
+
+.main-content .left-content{
+  height: 100%;
+  width: 45%;
+  background-color: teal;
+}
+
+.main-content .right-content{
+  height: 100%;
+  width: 45%;
+  /* background-color: teal; */
+}
