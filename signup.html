@@ -4,37 +4,38 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
-  <link rel="stylesheet" href="login.css">
+  <link rel="stylesheet" href="signup.css">
 </head>
 <body>
-   <div class="main-container centered-flex">
+  <div class="main-container centered-flex">
         <div class="form-container">
             <div class="icon fa fa-user"></div>
             <form class="centered-flex">
-                <div class="title">LOGIN</div>
+                <div class="title">SIGN UP</div>
                 <div class="msg"></div>
                 <div class="field">
                     <input type="text" placeholder="Username" id="uname">
                     <span class="fa fa-user"></span>
                 </div>
                 <div class="field">
+                    <input type="email" placeholder="Email" id="email">
+                    <span class="fa fa-envelope"></span>
+                </div>
+                <div class="field">
                     <input type="password" placeholder="Password" id="pass">
                     <span class="fa fa-lock"></span>
                 </div>
-                <div class="action centered-flex">
-                    <label for="remember" class="centered-flex">
-                        <input type="checkbox" id="remember"> Remember me
-                    </label>
-                    <a href="#">Forgot Password ?</a>
+                <div class="field">
+                    <input type="password" placeholder="Confirm Password" id="confirm-pass">
+                    <span class="fa fa-lock"></span>
                 </div>
                 <div class="btn-container">
-                    <input type="submit" id="login-btn" value="Login">
+                    <input type="submit" id="signup-btn" value="Sign Up">
                 </div>
-                <div class="signup">Don't have an Account?<a href="signup.html"> Sign up</a></div>
+                <div class="signup">Already have an account?<a href="login.html"> Login</a></div>
             </form>
         </div>
     </div>
-    <script src="bundle.js"></script>
-    <script src="login.js"></script>
+    <script src="signup.js"></script>
 </body>
 </html>
