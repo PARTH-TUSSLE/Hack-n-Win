@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <h1>Welcome to Your Dream Dashboard</h1>
+    <p id="user-info">Loading user info...</p>
+
+    <h2>Log Your Dream</h2>
+    <textarea id="dream-text" placeholder="Describe your dream..."></textarea>
+    <button id="submit-dream">Submit Dream</button>
+
+    <h2>Your Saved Dreams</h2>
+    <ul id="dream-list"></ul>
+
+    <button id="logout-btn">Log Out</button>
+
+    <script type="module">
+      import { logOutUser } from "./auth.js";
+      import { db, collection, addDoc, getDocs } from "./firebase.js";
+      import {
+        getAuth,
+        onAuthStateChanged,
+      } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+      const auth = getAuth(); //  Fix: Only calling getAuth() here, no re-declaration
+      const userInfo = document.getElementById("user-info");
+      const dreamInput = document.getElementById("dream-text");
+      const submitDreamBtn = document.getElementById("submit-dream");
+      const dreamList = document.getElementById("dream-list");
+
+      //  Check if user is logged in
+      onAuthStateChanged(auth, (user) => {
+        if (user) {
+          userInfo.innerText = `Logged in as: ${user.email}`;
+          loadDreams(user.uid);
+        } else {
+          alert("You are not logged in!");
+          window.location.href = "login.html"; // Redirect to login page
+        }
+      });
+
+      //  Save Dream to Firestore
+      async function saveDream(userId, dreamText) {
+        try {
+          await addDoc(collection(db, "Dreams"), {
+            userId: userId,
+            text: dreamText,
+            timestamp: new Date(),
+          });
+          alert("Dream saved!");
+          loadDreams(userId);
+        } catch (error) {
+          console.error(" Error saving dream:", error);
+        }
+      }
+
+      //  Load User's Dreams from Firestore
+      async function loadDreams(userId) {
+        dreamList.innerHTML = "";
+        const querySnapshot = await getDocs(collection(db, "Dreams"));
+        querySnapshot.forEach((doc) => {
+          const dream = doc.data();
+          if (dream.userId === userId) {
+            const li = document.createElement("li");
+            li.textContent = dream.text;
+            dreamList.appendChild(li);
+          }
+        });
+      }
+
+      //  Handle Dream Submission
+      submitDreamBtn.addEventListener("click", () => {
+        const dreamText = dreamInput.value.trim();
+
+        if (!dreamText) {
+          alert("Please enter a dream before submitting.");
+          return;
+        }
+
+        const user = auth.currentUser;
+        if (!user) {
+          alert("No user is logged in! Please log in again.");
+          window.location.href = "login.html";
+          return;
+        }
+
+        saveDream(user.uid, dreamText);
+        dreamInput.value = "";
+      });
+
+      //  Logout Button
+      document
+        .getElementById("logout-btn")
+        .addEventListener("click", logOutUser);
+    </script>
+  </body>
+</html>

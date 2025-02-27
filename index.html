@@ -10,41 +10,54 @@
     <nav class="navbar">
       <div class="nav-content">
         <div class="left-nav">
-          <a href="#">Noxiva AI</a>
+          <a href="#">Noxis AI</a>
         </div>
         <div class="right-nav">
           <a href="#">Home</a>
           <a href="login.html">Login</a>
-          <div class="dropdown-container">
-            <a href="#" class="dropbtn">Features</a>
-            <ul class="dropdown-content">
-              <li><a href="#">Dream Analysis</a></li>
-              <li><a href="#">AI-Generated Art</a></li>
-              <li><a href="#">Emotion Tracking</a></li>
-              <li><a href="#">Voice-to-Text Logging</a></li>
-            </ul>
+          <div class="dropdown">
+            <a class="dropdown-button">Features</a>
+            <div class="dropdown-content">
+              <a href="#">Dream Analysis</a>
+              <a href="#">Voice Logging</a>
+              <a href="#">Emotion Tracking</a>
+              <a href="#">Dream Art</a>
+              <a href="#">Journal & History</a>
+              <a href="#">Personalized Insights</a>
+            </div>
           </div>
           <a href="#">Contact</a>
+          <button id="logout-btn">Log Out</button>
+
+          <script type="module">
+            import { logOutUser } from "./auth.js";
+            document
+              .getElementById("logout-btn")
+              .addEventListener("click", logOutUser);
+          </script>
         </div>
       </div>
     </nav>
     <div class="main-content">
       <div class="left-content">
-    <h1>From Dreams to AI-Powered Reality.</h1>
-    <p>
-        Explore the intersection of imagination and technology. Track, analyze, and visualize your dreams 
-        like never before.
-    </p>
-    <ul>
-        <li>AI-driven dream analysis</li>
-        <li>Stunning AI-generated visuals</li>
-        <li>Track emotions & patterns over time</li>
-        <li>Voice & text-based dream logging</li>
-    </ul>
-    <button class="cta-button" onclick="window.location.href='dreamlog.html'">Get Started</button>
-
-</div>
-
+        <h1>From Dreams to AI-Powered Reality.</h1>
+        <p>
+          Explore the intersection of imagination and technology. Track,
+          analyze, and visualize your dreams like never before.
+        </p>
+        <ul>
+          <li>AI-driven dream analysis</li>
+          <li>Stunning AI-generated visuals</li>
+          <li>Track emotions & patterns over time</li>
+          <li>Voice & text-based dream logging</li>
+        </ul>
+        <button
+          class="cta-button"
+          onclick="window.location.href='dreamlog.html'"
+        >
+          Get Started
+        </button>
+      </div>
 
       <div class="right-content">
         <spline-viewer
@@ -58,6 +71,6 @@
       type="module"
       src="https://unpkg.com/@splinetool/viewer@1.9.71/build/spline-viewer.js"
     ></script>
-    <script src="app.js"></script>
+    <script type="module" src="app.js"></script>
   </body>
 </html>

@@ -1,41 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-  <link rel="stylesheet" href="signup.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="main-container centered-flex">
-        <div class="form-container">
-            <div class="icon fa fa-user"></div>
-            <form class="centered-flex">
-                <div class="title">SIGN UP</div>
-                <div class="msg"></div>
-                <div class="field">
-                    <input type="text" placeholder="Username" id="uname">
-                    <span class="fa fa-user"></span>
-                </div>
-                <div class="field">
-                    <input type="email" placeholder="Email" id="email">
-                    <span class="fa fa-envelope"></span>
-                </div>
-                <div class="field">
-                    <input type="password" placeholder="Password" id="pass">
-                    <span class="fa fa-lock"></span>
-                </div>
-                <div class="field">
-                    <input type="password" placeholder="Confirm Password" id="confirm-pass">
-                    <span class="fa fa-lock"></span>
-                </div>
-                <div class="btn-container">
-                    <input type="submit" id="signup-btn" value="Sign Up">
-                </div>
-                <div class="signup">Already have an account?<a href="login.html"> Login</a></div>
-            </form>
-        </div>
-    </div>
-    <script src="signup.js"></script>
+
+    <h2>Signup</h2>
+    <input type="email" id="signup-email" placeholder="Enter your email">
+    <input type="password" id="signup-password" placeholder="Enter your password">
+    <button id="signup-btn">Sign Up</button>
+    
+    <p>Already have an account? <a href="login.html">Login here</a></p>
+
+    <script type="module">
+        import { signUpUser } from "./auth.js";
+
+        document.getElementById("signup-btn").addEventListener("click", () => {
+            const email = document.getElementById("signup-email").value;
+            const password = document.getElementById("signup-password").value;
+            signUpUser(email, password);
+        });
+    </script>
+
 </body>
 </html>
