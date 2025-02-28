@@ -4,7 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Dashboard</title>
-    <link rel="stylesheet" href="style.css" />
+    <!-- <link rel="stylesheet" href="style.css" /> -->
+    <link rel="icon" href="data:,">
   </head>
   <body>
     <h1>Welcome to Your Dream Dashboard</h1>
@@ -45,33 +46,76 @@
       });
 
       //  Save Dream to Firestore
-      async function saveDream(userId, dreamText) {
-        try {
-          await addDoc(collection(db, "Dreams"), {
+     async function saveDream(userId, dreamText) {
+    try {
+        const docRef = await addDoc(collection(db, "Dreams"), {
             userId: userId,
             text: dreamText,
-            timestamp: new Date(),
-          });
-          alert("Dream saved!");
-          loadDreams(userId);
-        } catch (error) {
-          console.error(" Error saving dream:", error);
-        }
-      }
+            timestamp: new Date(),  //  Store timestamp for sorting
+        });
+
+        alert("Dream saved!");
+        loadDreams(userId); // Reload dreams after saving
+    } catch (error) {
+        console.error(" Error saving dream:", error);
+    }
+}
+
+
+//  Make editDream() accessible globally
+window.editDream = async function (dreamId, oldText) {
+    const newText = prompt("Edit your dream:", oldText);
+    if (!newText) return; // User canceled edit
+
+    try {
+        await updateDoc(doc(db, "Dreams", dreamId), { text: newText });
+        alert("Dream updated!");
+        loadDreams(auth.currentUser.uid); // Reload dreams after editing
+    } catch (error) {
+        console.error(" Error updating dream:", error);
+    }
+};
+
+//  Make deleteDream() accessible globally
+window.deleteDream = async function (dreamId) {
+    if (!confirm("Are you sure you want to delete this dream?")) return;
+
+    try {
+        await deleteDoc(doc(db, "Dreams", dreamId));
+        alert("Dream deleted!");
+        loadDreams(auth.currentUser.uid); // Reload dreams after deletion
+    } catch (error) {
+        console.error(" Error deleting dream:", error);
+    }
+};
+
+
+
 
       //  Load User's Dreams from Firestore
-      async function loadDreams(userId) {
-        dreamList.innerHTML = "";
-        const querySnapshot = await getDocs(collection(db, "Dreams"));
-        querySnapshot.forEach((doc) => {
-          const dream = doc.data();
-          if (dream.userId === userId) {
-            const li = document.createElement("li");
-            li.textContent = dream.text;
-            dreamList.appendChild(li);
-          }
-        });
-      }
+import { query, where, orderBy, doc, updateDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js"; //  Import Firestore functions
+
+async function loadDreams(userId) {
+    dreamList.innerHTML = "";
+
+    const q = query(collection(db, "Dreams"), where("userId", "==", userId), orderBy("timestamp", "desc"));
+    const querySnapshot = await getDocs(q);
+
+    querySnapshot.forEach((docSnap) => {
+        const dream = docSnap.data();
+        const dreamId = docSnap.id;
+
+        const li = document.createElement("li");
+        li.innerHTML = `
+            <span>${dream.text}</span>
+            <button onclick="editDream('${dreamId}', '${dream.text}')">✏️ Edit</button>
+            <button onclick="deleteDream('${dreamId}')">🗑️ Delete</button>
+        `;
+        dreamList.appendChild(li);
+    });
+}
+
+
 
       //  Handle Dream Submission
       submitDreamBtn.addEventListener("click", () => {
