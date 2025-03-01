@@ -1,112 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard | Noxiva</title>
-    <link rel="stylesheet" href="dashboard.css" />
-    <link rel="icon" href="data:," />
-  </head>
-  <body>
+    <link rel="stylesheet" href="dashboard.css">
+    <link rel="icon" href="data:,">
+</head>
+<body>
     <div class="dashboard-container">
-      <!--  Sidebar Navigation -->
-      <nav class="sidebar">
-        <h2>Dream Portal</h2>
-        <ul>
-          <li><a href="#" data-section="log-dream">Log Your Dream</a></li>
-          <li>
-            <a href="#" data-section="analyze-dream"> Analyze Your Dream</a>
-          </li>
-          <li>
-            <a href="#" data-section="emotion-tracking"
-              >Emotion Tracking</a
-            >
-          </li>
-          <li><a href="#" data-section="dream-art">Dream Art</a></li>
-          <li>
-            <a href="#" data-section="journal-history">Journal & History</a>
-          </li>
-          <li><a href="#" id="logout-btn"> Log Out</a></li>
-        </ul>
-      </nav>
+        <!-- Sidebar Navigation -->
+        <nav class="sidebar">
+            <h2>Dream Portal</h2>
+            <ul>
+                <li><a href="#" data-section="log-dream">Log Your Dream</a></li>
+                <li><a href="#" data-section="analyze-dream">Analyze Your Dream</a></li>
+                <li><a href="#" data-section="emotion-tracking">Emotion Tracking</a></li>
+                <li><a href="#" data-section="dream-art">Dream Art</a></li>
+                <li><a href="#" data-section="journal-history">Journal & History</a></li>
+                <li><a href="#" id="logout-btn">Log Out</a></li>
+            </ul>
+        </nav>
 
-      <!--  Main Content -->
-      <div class="main-content">
-        <div class="default-view">
-          <p><div id="user-email"></div></p>
-          <h2>Welcome to Your Dream Dashboard</h2>
-          <p>
-            Here you can explore the fascinating world of your dreams. Use the sidebar to navigate through various features:
-          </p>
-          <ul>
-            <li><strong>Log Your Dream:</strong> Record your dreams in detail.</li>
-            <li><strong>Analyze Your Dream:</strong> Get insights and interpretations of your dreams.</li>
-            <li><strong>Emotion Tracking:</strong> Track the emotions associated with your dreams.</li>
-            <li><strong>Dream Art:</strong> Visualize your dreams with stunning AI-generated art.</li>
-            <li><strong>Journal & History:</strong> Review your dream journal and history.</li>
-          </ul>
-          <p>
-            Click on any feature in the sidebar to get started. Happy dreaming!
-          </p>
-          <spline-viewer
-            class="spline-element"
-            url="https://prod.spline.design/XrdSPpWprzRZSuMW/scene.splinecode"
-            hideWatermark
-          ></spline-viewer>
-        </div>
+        <!-- Main Content -->
+        <div class="main-content">
+            <div class="default-view">
+                <p><div id="user-email"></div></p>
+                <h2>Welcome to Your Dream Dashboard</h2>
+                <p>Explore and analyze your dreams using AI.</p>
+            </div>
 
-        <!-- Sections -->
-        <div id="log-dream" class="section" style="display: none;">
-          <h2> Log Your Dream</h2>
-          <textarea
-            id="dream-text"
-            placeholder="Describe your dream..."
-          ></textarea>
-          <button id="submit-dream">Submit Dream</button>
-        </div>
+             <div id="log-dream" class="section">
+    <h2>Log Your Dream</h2>
+    <textarea id="dream-text" placeholder="Write your dream..."></textarea>
+    <button id="submit-dream">Save Dream</button>
+</div>
+             
+            <div id="analyze-dream" class="section" style="display: none;">
+                <h2>Analyze Your Dream</h2>
+                <textarea id="analyze-dream-text" placeholder="Describe your dream..."></textarea>
+                <button id="analyze-dream-btn">Analyze</button>
+                <div id="dream-analysis-result"></div>
+            </div>
 
-        <div id="analyze-dream" class="section" style="display: none;">
-          <h2> Analyze Your Dream</h2>
-          <!-- Add content for analyzing dreams here -->
-        </div>
+            <!-- ...
+<div id="emotion-tracking" class="section" style="display: none;">
+    <h2>Emotion Tracking</h2>
+    <div id="emotion-analysis-result"></div>
+</div>
+... -->
 
-        <div id="emotion-tracking" class="section" style="display: none;">
-          <h2> Emotion Tracking</h2>
-          <!-- Add content for emotion tracking here -->
-        </div>
+            <div id="journal-history" class="section" style="display: none;">
+    <h2>Journal & History</h2>
+    <ul id="dream-list"></ul>
+</div>
 
-        <div id="dream-art" class="section" style="display: none;">
-          <h2> Dream Art</h2>
-          <!-- Add content for dream art here -->
+           
         </div>
-
-        <div id="journal-history" class="section" style="display: none;">
-          <h2> Journal & History</h2>
-          <ul id="dream-list"></ul>
-        </div>
-      </div>
     </div>
 
-    <!--  Firebase SDK -->
-    <script
-      type="module"
-      src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js"
-    ></script>
-    <script
-      type="module"
-      src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js"
-    ></script>
-    <script
-      type="module"
-      src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js"
-    ></script>
-
-    <!--  Firebase Config & Dashboard Scripts -->
     <script type="module" src="firebase.js"></script>
     <script type="module" src="dashboard.js"></script>
-    <script
-      type="module"
-      src="https://unpkg.com/@splinetool/viewer@1.9.72/build/spline-viewer.js"
-    ></script>
-  </body>
+</body>
 </html>

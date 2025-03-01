@@ -5,17 +5,15 @@ body {
   margin: 0;
   display: flex;
   font-size: large;
-  overflow: hidden;
 }
 
-/*  Dashboard Layout */
 .dashboard-container {
   display: flex;
   width: 100%;
   height: 100vh;
 }
 
-/*  Sidebar Styling */
+/* Sidebar Styling */
 .sidebar {
   width: 260px;
   background: #1f1f1f;
@@ -26,7 +24,6 @@ body {
 
 .sidebar h2 {
   color: #0f9d58;
-  font-size: 24px;
 }
 
 .sidebar ul {
@@ -39,11 +36,11 @@ body {
 }
 
 .sidebar ul li a {
-  display: block;
   text-decoration: none;
   color: #fff;
   padding: 10px;
   border-radius: 5px;
+  display: block;
   transition: 0.3s;
 }
 
@@ -52,63 +49,18 @@ body {
   color: #000;
 }
 
-/*  Main Content */
+/* Main Content */
 .main-content {
-  position: relative;
   width: 100%;
-  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 20px; /* Add padding to ensure content is not cut off */
-  margin-top: 1rem;
-}
-
-#default-view {
-  position: relative;
-  width: 80%;
-  height: 80%;
-}
-
-.spline-element {
-  width: 100%;
-  height: 100%;
-  visibility: visible;
-}
-
-.feature-links {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  gap: 1rem;
-}
-
-.feature-link {
-  background-color: #333;
-  color: #fff;
-  padding: 0.5rem 1rem;
-  border-radius: 5px;
-  text-decoration: none;
-  transition: background-color 0.3s;
-}
-
-.feature-link:hover {
-  background-color: #555;
+  padding: 20px;
 }
 
 .section {
   display: none;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
   width: 80%;
-  height: 80%;
   background-color: #1f1f1f;
   border-radius: 10px;
   padding: 2rem;
@@ -116,27 +68,40 @@ body {
   overflow-y: auto;
 }
 
-#log-dream,
-#analyze-dream,
-#emotion-tracking,
-#dream-art,
-#journal-history {
-  display: none;
+/* Dream Analysis Section */
+#analyze-dream {
+  text-align: center;
 }
 
-h1 {
-  font-size: 32px;
-  color: #0f9d58;
-}
-
-#dream-list {
-  list-style: none;
-  padding: 0;
-}
-
-#dream-list li {
-  background: #222;
-  padding: 15px;
-  margin: 10px 0;
+#analyze-dream-text {
+  width: 100%;
+  height: 100px;
+  padding: 10px;
+  margin-top: 10px;
   border-radius: 5px;
+  border: none;
+  background: #222;
+  color: #fff;
+}
+
+#analyze-dream-btn {
+  margin-top: 10px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background: #0f9d58;
+  color: white;
+  cursor: pointer;
+}
+
+#analyze-dream-btn:hover {
+  background: #0a7e45;
+}
+
+#dream-analysis-result {
+  margin-top: 20px;
+  padding: 15px;
+  background: #222;
+  border-radius: 5px;
+  min-height: 50px;
 }
