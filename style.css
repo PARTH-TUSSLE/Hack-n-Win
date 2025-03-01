@@ -10,6 +10,7 @@
   margin: 0;
   font-family: poppins;
   box-sizing: border-box;
+  overflow: hidden;
 }
 
 body,
@@ -59,6 +60,7 @@ a {
   font-size: 1.3rem;
   padding: 1rem;
   margin-right: 1rem;
+  flex-wrap: wrap; /* Add this line to allow wrapping */
 }
 
 .dropdown-button {
@@ -118,7 +120,7 @@ a {
 }
 
 .spline-element {
-  height: 100%;
+  height: 108%;
   width: 100%;
 }
 

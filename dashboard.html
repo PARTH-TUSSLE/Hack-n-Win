@@ -3,144 +3,110 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Dashboard</title>
-    <!-- <link rel="stylesheet" href="style.css" /> -->
-    <link rel="icon" href="data:,">
+    <title>Dashboard | Noxiva</title>
+    <link rel="stylesheet" href="dashboard.css" />
+    <link rel="icon" href="data:," />
   </head>
   <body>
-    <h1>Welcome to Your Dream Dashboard</h1>
-    <p id="user-info">Loading user info...</p>
+    <div class="dashboard-container">
+      <!--  Sidebar Navigation -->
+      <nav class="sidebar">
+        <h2>Dream Portal</h2>
+        <ul>
+          <li><a href="#" data-section="log-dream">Log Your Dream</a></li>
+          <li>
+            <a href="#" data-section="analyze-dream"> Analyze Your Dream</a>
+          </li>
+          <li>
+            <a href="#" data-section="emotion-tracking"
+              >Emotion Tracking</a
+            >
+          </li>
+          <li><a href="#" data-section="dream-art">Dream Art</a></li>
+          <li>
+            <a href="#" data-section="journal-history">Journal & History</a>
+          </li>
+          <li><a href="#" id="logout-btn"> Log Out</a></li>
+        </ul>
+      </nav>
 
-    <h2>Log Your Dream</h2>
-    <textarea id="dream-text" placeholder="Describe your dream..."></textarea>
-    <button id="submit-dream">Submit Dream</button>
+      <!--  Main Content -->
+      <div class="main-content">
+        <div class="default-view">
+          <p><div id="user-email"></div></p>
+          <h2>Welcome to Your Dream Dashboard</h2>
+          <p>
+            Here you can explore the fascinating world of your dreams. Use the sidebar to navigate through various features:
+          </p>
+          <ul>
+            <li><strong>Log Your Dream:</strong> Record your dreams in detail.</li>
+            <li><strong>Analyze Your Dream:</strong> Get insights and interpretations of your dreams.</li>
+            <li><strong>Emotion Tracking:</strong> Track the emotions associated with your dreams.</li>
+            <li><strong>Dream Art:</strong> Visualize your dreams with stunning AI-generated art.</li>
+            <li><strong>Journal & History:</strong> Review your dream journal and history.</li>
+          </ul>
+          <p>
+            Click on any feature in the sidebar to get started. Happy dreaming!
+          </p>
+          <spline-viewer
+            class="spline-element"
+            url="https://prod.spline.design/XrdSPpWprzRZSuMW/scene.splinecode"
+            hideWatermark
+          ></spline-viewer>
+        </div>
 
-    <h2>Your Saved Dreams</h2>
-    <ul id="dream-list"></ul>
+        <!-- Sections -->
+        <div id="log-dream" class="section" style="display: none;">
+          <h2> Log Your Dream</h2>
+          <textarea
+            id="dream-text"
+            placeholder="Describe your dream..."
+          ></textarea>
+          <button id="submit-dream">Submit Dream</button>
+        </div>
 
-    <button id="logout-btn">Log Out</button>
+        <div id="analyze-dream" class="section" style="display: none;">
+          <h2> Analyze Your Dream</h2>
+          <!-- Add content for analyzing dreams here -->
+        </div>
 
-    <script type="module">
-      import { logOutUser } from "./auth.js";
-      import { db, collection, addDoc, getDocs } from "./firebase.js";
-      import {
-        getAuth,
-        onAuthStateChanged,
-      } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+        <div id="emotion-tracking" class="section" style="display: none;">
+          <h2> Emotion Tracking</h2>
+          <!-- Add content for emotion tracking here -->
+        </div>
 
-      const auth = getAuth(); //  Fix: Only calling getAuth() here, no re-declaration
-      const userInfo = document.getElementById("user-info");
-      const dreamInput = document.getElementById("dream-text");
-      const submitDreamBtn = document.getElementById("submit-dream");
-      const dreamList = document.getElementById("dream-list");
+        <div id="dream-art" class="section" style="display: none;">
+          <h2> Dream Art</h2>
+          <!-- Add content for dream art here -->
+        </div>
 
-      //  Check if user is logged in
-      onAuthStateChanged(auth, (user) => {
-        if (user) {
-          userInfo.innerText = `Logged in as: ${user.email}`;
-          loadDreams(user.uid);
-        } else {
-          alert("You are not logged in!");
-          window.location.href = "login.html"; // Redirect to login page
-        }
-      });
+        <div id="journal-history" class="section" style="display: none;">
+          <h2> Journal & History</h2>
+          <ul id="dream-list"></ul>
+        </div>
+      </div>
+    </div>
 
-      //  Save Dream to Firestore
-     async function saveDream(userId, dreamText) {
-    try {
-        const docRef = await addDoc(collection(db, "Dreams"), {
-            userId: userId,
-            text: dreamText,
-            timestamp: new Date(),  //  Store timestamp for sorting
-        });
+    <!--  Firebase SDK -->
+    <script
+      type="module"
+      src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js"
+    ></script>
+    <script
+      type="module"
+      src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js"
+    ></script>
+    <script
+      type="module"
+      src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js"
+    ></script>
 
-        alert("Dream saved!");
-        loadDreams(userId); // Reload dreams after saving
-    } catch (error) {
-        console.error(" Error saving dream:", error);
-    }
-}
-
-
-//  Make editDream() accessible globally
-window.editDream = async function (dreamId, oldText) {
-    const newText = prompt("Edit your dream:", oldText);
-    if (!newText) return; // User canceled edit
-
-    try {
-        await updateDoc(doc(db, "Dreams", dreamId), { text: newText });
-        alert("Dream updated!");
-        loadDreams(auth.currentUser.uid); // Reload dreams after editing
-    } catch (error) {
-        console.error(" Error updating dream:", error);
-    }
-};
-
-//  Make deleteDream() accessible globally
-window.deleteDream = async function (dreamId) {
-    if (!confirm("Are you sure you want to delete this dream?")) return;
-
-    try {
-        await deleteDoc(doc(db, "Dreams", dreamId));
-        alert("Dream deleted!");
-        loadDreams(auth.currentUser.uid); // Reload dreams after deletion
-    } catch (error) {
-        console.error(" Error deleting dream:", error);
-    }
-};
-
-
-
-
-      //  Load User's Dreams from Firestore
-import { query, where, orderBy, doc, updateDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js"; //  Import Firestore functions
-
-async function loadDreams(userId) {
-    dreamList.innerHTML = "";
-
-    const q = query(collection(db, "Dreams"), where("userId", "==", userId), orderBy("timestamp", "desc"));
-    const querySnapshot = await getDocs(q);
-
-    querySnapshot.forEach((docSnap) => {
-        const dream = docSnap.data();
-        const dreamId = docSnap.id;
-
-        const li = document.createElement("li");
-        li.innerHTML = `
-            <span>${dream.text}</span>
-            <button onclick="editDream('${dreamId}', '${dream.text}')">✏️ Edit</button>
-            <button onclick="deleteDream('${dreamId}')">🗑️ Delete</button>
-        `;
-        dreamList.appendChild(li);
-    });
-}
-
-
-
-      //  Handle Dream Submission
-      submitDreamBtn.addEventListener("click", () => {
-        const dreamText = dreamInput.value.trim();
-
-        if (!dreamText) {
-          alert("Please enter a dream before submitting.");
-          return;
-        }
-
-        const user = auth.currentUser;
-        if (!user) {
-          alert("No user is logged in! Please log in again.");
-          window.location.href = "login.html";
-          return;
-        }
-
-        saveDream(user.uid, dreamText);
-        dreamInput.value = "";
-      });
-
-      //  Logout Button
-      document
-        .getElementById("logout-btn")
-        .addEventListener("click", logOutUser);
-    </script>
+    <!--  Firebase Config & Dashboard Scripts -->
+    <script type="module" src="firebase.js"></script>
+    <script type="module" src="dashboard.js"></script>
+    <script
+      type="module"
+      src="https://unpkg.com/@splinetool/viewer@1.9.72/build/spline-viewer.js"
+    ></script>
   </body>
 </html>
